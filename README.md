@@ -1,6 +1,6 @@
 # DiagLogViewer — Vehicle Diagnostic Log Analyzer
 
-> **Desktop tool for vehicle diagnostic log analysis with GUI**  
+> **Desktop GUI tool for parsing, filtering, and analyzing vehicle diagnostic logs**  
 > AUTOSAR DLT | CAN Bus | UDS | OBD-II | J1939 | C++ Frame Parser | Anomaly Detection
 
 ![CI](https://github.com/J4jatin/diaglogviewer/actions/workflows/ci.yml/badge.svg)
@@ -11,9 +11,9 @@
 
 ## Overview
 
-DiagLogViewer is a professional desktop application for parsing, filtering, and analyzing vehicle diagnostic logs. Built directly to mirror the tooling needs of automotive diagnostic stack teams (control unit diagnostics, OTA enablers, vehicle data management).
+Working with automotive diagnostic logs during my MSc, I kept running into the same problem: no good open-source tool existed for visually parsing and filtering AUTOSAR DLT and CAN bus logs together. Most workflows involved grep, manual scripts, and Excel — slow and error-prone.
 
-**Directly addresses the Porsche internship task:** *"Optimization of internal development processes through new tools, such as a dedicated desktop tool for log analysis including a GUI."*
+DiagLogViewer fixes that. It's a PyQt5 desktop app that parses DLT and CAN `.asc` logs, decodes UDS service calls, detects anomalies automatically, and generates HTML reports — all in one window.
 
 ---
 
