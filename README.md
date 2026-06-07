@@ -6,6 +6,7 @@
 ![CI](https://github.com/J4jatin/diaglogviewer/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![C++](https://img.shields.io/badge/C%2B%2B-17-orange)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?logo=streamlit)](https://cunetperftes-qxuyabpwbytevbeovwgeeo.streamlit.app)
 
 ---
 
