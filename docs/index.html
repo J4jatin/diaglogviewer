@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DiagLogViewer — Vehicle Diagnostic Log Analyzer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f14; color: #e0e0e0; }
+  header { background: #1a1a24; border-bottom: 2px solid #cc0000; padding: 2rem; text-align: center; }
+  header h1 { font-size: 2rem; color: #fff; margin-bottom: 0.5rem; }
+  header p { color: #aaa; font-size: 1rem; }
+  .badges { margin: 1rem 0; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+  .container { max-width: 960px; margin: 2rem auto; padding: 0 1.5rem; }
+  .card { background: #1a1a24; border: 1px solid #2a2a3a; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .card h2 { color: #cc0000; margin-bottom: 1rem; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .feature { background: #12121a; border-radius: 6px; padding: 1rem; border-left: 3px solid #cc0000; }
+  .feature h3 { color: #fff; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .feature p { color: #888; font-size: 0.8rem; }
+  pre { background: #0a0a10; border: 1px solid #2a2a3a; border-radius: 6px; padding: 1rem; overflow-x: auto; color: #7ec8a0; font-size: 0.85rem; line-height: 1.5; }
+  .btn { display: inline-block; background: #cc0000; color: #fff; padding: 0.7rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin: 0.3rem; }
+  .btn-outline { background: transparent; border: 1px solid #cc0000; color: #cc0000; }
+  .cta { text-align: center; margin: 2rem 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #12121a; color: #cc0000; padding: 0.6rem 1rem; text-align: left; font-size: 0.85rem; }
+  td { padding: 0.6rem 1rem; border-bottom: 1px solid #2a2a3a; font-size: 0.85rem; color: #bbb; }
+  code { background: #12121a; padding: 0.1rem 0.4rem; border-radius: 3px; font-family: monospace; color: #7ec8a0; font-size: 0.85rem; }
+  footer { text-align: center; padding: 2rem; color: #555; font-size: 0.85rem; border-top: 1px solid #2a2a3a; margin-top: 2rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔍 DiagLogViewer</h1>
+  <p>Vehicle Diagnostic Log Analyzer — AUTOSAR DLT · CAN Bus · UDS · Anomaly Detection</p>
+  <div class="badges">
+    <img src="https://github.com/J4jatin/diaglogviewer/actions/workflows/ci.yml/badge.svg" alt="CI">
+    <img src="https://img.shields.io/badge/python-3.9%2B-blue" alt="Python">
+    <img src="https://img.shields.io/badge/C%2B%2B-17-orange" alt="C++17">
+    <img src="https://img.shields.io/badge/tests-16%20passing-green" alt="Tests">
+  </div>
+  <div class="cta">
+    <a class="btn" href="https://github.com/J4jatin/diaglogviewer">View on GitHub</a>
+    <a class="btn btn-outline" href="https://github.com/J4jatin/diaglogviewer/archive/refs/heads/main.zip">Download ZIP</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>What it does</h2>
+    <p style="color:#bbb; line-height:1.7">DiagLogViewer is a PyQt5 desktop app for parsing and analyzing vehicle diagnostic logs. It handles AUTOSAR DLT format and Vector CANalyzer <code>.asc</code> files, decodes UDS service calls, automatically detects anomalies (log gaps, error bursts, OTA failures), and exports professional HTML reports.</p>
+  </div>
+
+  <div class="card">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature"><h3>DLT Parser</h3><p>AUTOSAR Diagnostic Log and Trace with UDS service ID decoding (15+ services)</p></div>
+      <div class="feature"><h3>CAN Bus Parser</h3><p>Vector .asc format, OBD-II PID, J1939 PGN — with C++17 frame decoder</p></div>
+      <div class="feature"><h3>Anomaly Detection</h3><p>Log gaps >500ms, error bursts, OTA failures, SecurityAccess violations</p></div>
+      <div class="feature"><h3>Performance Stats</h3><p>Mean, P95, P99 inter-message gap. Per-ECU message rate breakdown</p></div>
+      <div class="feature"><h3>PyQt5 GUI</h3><p>Dark theme, real-time filters, embedded matplotlib charts</p></div>
+      <div class="feature"><h3>HTML Reports</h3><p>Jinja2-rendered diagnostic reports with anomaly tables and ECU stats</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Quick Start</h2>
+    <pre>pip install PyQt5 matplotlib jinja2
+
+# Optional: compile C++17 CAN frame parser
+cd parser && g++ -O2 -std=c++17 -o can_frame_parser can_frame_parser.cpp
+
+python main.py</pre>
+  </div>
+
+  <div class="card">
+    <h2>UDS Services Decoded</h2>
+    <table>
+      <tr><th>Service ID</th><th>Name</th></tr>
+      <tr><td><code>0x10</code></td><td>DiagnosticSessionControl</td></tr>
+      <tr><td><code>0x22</code></td><td>ReadDataByIdentifier</td></tr>
+      <tr><td><code>0x27</code></td><td>SecurityAccess</td></tr>
+      <tr><td><code>0x2E</code></td><td>WriteDataByIdentifier</td></tr>
+      <tr><td><code>0x34</code></td><td>RequestDownload (OTA)</td></tr>
+      <tr><td><code>0x36</code></td><td>TransferData (OTA)</td></tr>
+      <tr><td><code>0x7F</code></td><td>NegativeResponse</td></tr>
+    </table>
+  </div>
+</div>
+
+<footer>
+  Built by <strong>Jattin Shah</strong> — MSc Applied AI, TU Dresden &nbsp;·&nbsp;
+  <a href="https://github.com/J4jatin" style="color:#cc0000">github.com/J4jatin</a>
+</footer>
+</body>
+</html>
